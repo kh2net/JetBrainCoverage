@@ -24,7 +24,6 @@ namespace JetBrainCoverage
                 new List<string> { "Spalte1", "Spalte2", "Spalte3" },
                 new List<string> { "Daten1", "Daten2", "Daten3" },
                 new List<string> { "Daten4", "Daten5", "Daten6" }
-                new List<string> { "Daten4", "Daten5", "Daten6" }
             };
             if (filePath.Contains("\\")) return false;
             SaveListToCSV(data, filePath);
