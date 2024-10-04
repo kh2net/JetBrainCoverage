@@ -24,7 +24,7 @@ namespace UnitTestProject1
             List<List<string>> data = new List<List<string>>
             {
                 new List<string> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<string> { "Daten1", "Daten2", "Daten3" },
+                new List<string> { "Daten1", "Daten2", "Daten3" }
                 new List<string> { "Daten4", "Daten5", "Daten6" }
             };
             string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
