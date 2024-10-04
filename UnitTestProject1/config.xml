@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageParams>
+  <TargetExecutable>C:\Tools\NUnit.Console-3.8.0\nunit3-console.exe</TargetExecutable>
+  <TargetArguments>UnitTestProject1.dll</TargetArguments>
+  <TargetWorkingDir>C:\Users\khaireddine.khelifi\source\repos\JetBrainCoverage\UnitTestProject1\bin\Debug</TargetWorkingDir>
+  <Output>Snapshot1.dcvr</Output>
+    
+</CoverageParams>

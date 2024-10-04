@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MergeParams>
+  <Source>Snapshot2.Json</Source>
+  <Source>Snapshot1.Json</Source>
+  <Output>MergedSnapshots.Json</Output>
+</MergeParams>
