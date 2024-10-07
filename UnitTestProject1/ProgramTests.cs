@@ -41,65 +41,65 @@ namespace UnitTestProject1
             Assert.AreEqual("Daten4,Daten5,Daten6", lines[2]);
         }
 
-        //[Test]
-        //public void Test_SaveListToCSV_WithListOfObjects_ShouldSaveCSVFile()
-        //{
-        //    // Arrange
-        //    var s = DateTime.Now.ToString();
-        //    List<List<object>> data = new List<List<object>>
-        //    {
-        //        new List<object> { "Spalte1", "Spalte2", "Spalte3" },
-        //        new List<object> { 1, 2.5, s },
-        //        new List<object> { "Daten4", true, 3.14 }
-        //    };
-        //    string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
+        [Test]
+        public void Test_SaveListToCSV_WithListOfObjects_ShouldSaveCSVFile()
+        {
+            // Arrange
+            var s = DateTime.Now.ToString();
+            List<List<object>> data = new List<List<object>>
+            {
+                new List<object> { "Spalte1", "Spalte2", "Spalte3" },
+                new List<object> { 1, 2.5, s },
+                new List<object> { "Daten4", true, 3.14 }
+            };
+            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
 
-        //    // Act
-        //    program.SaveListToCSV(data, filePath);
+            // Act
+            program.SaveListToCSV(data, filePath);
 
-        //    // Assert
-        //    Assert.IsTrue(File.Exists(filePath));
-        //    string[] lines = File.ReadAllLines(filePath);
-        //    Assert.AreEqual(3, lines.Length);
-        //    Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-        //    Assert.AreEqual("1,2.5," + s, lines[1]);
-        //    Assert.AreEqual("Daten4,True,3.14", lines[2]);
-        //}
+            // Assert
+            Assert.IsTrue(File.Exists(filePath));
+            string[] lines = File.ReadAllLines(filePath);
+            Assert.AreEqual(3, lines.Length);
+            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
+            Assert.AreEqual("1,2.5," + s, lines[1]);
+            Assert.AreEqual("Daten4,True,3.14", lines[2]);
+        }
 
-        //[Test]
-        //public void Test_SaveListToCSV_WithEmptyList_ShouldSaveEmptyCSVFile()
-        //{
-        //    // Arrange
-        //    List<List<string>> data = new List<List<string>>();
+        [Test]
+        public void Test_SaveListToCSV_WithEmptyList_ShouldSaveEmptyCSVFile()
+        {
+            // Arrange
+            List<List<string>> data = new List<List<string>>();
 
-        //    string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
+            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
 
-        //    // Act
-        //    program.SaveListToCSV(data, filePath);
+            // Act
+            program.SaveListToCSV(data, filePath);
 
-        //    // Assert
-        //    Assert.IsTrue(File.Exists(filePath));
-        //    string[] lines = File.ReadAllLines(filePath);
-        //    Assert.AreEqual(0, lines.Length);
-        //}
+            // Assert
+            Assert.IsTrue(File.Exists(filePath));
+            string[] lines = File.ReadAllLines(filePath);
+            Assert.AreEqual(0, lines.Length);
+        }
 
-        //[Test]
-        //public void Test_Test_WithFilePath_ShouldSaveCSVFile()
-        //{
-        //    // Arrange
-        //    string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
+        [Test]
+        public void Test_Test_WithFilePath_ShouldSaveCSVFile()
+        {
+            // Arrange
+            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
 
-        //    // Act
-        //    bool result = program.Test(filePath);
+            // Act
+            bool result = program.Test(filePath);
 
-        //    // Assert
-        //    Assert.IsTrue(result);
-        //    Assert.IsTrue(File.Exists(filePath));
-        //    string[] lines = File.ReadAllLines(filePath);
-        //    Assert.AreEqual(3, lines.Length);
-        //    Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-        //    Assert.AreEqual("Daten1,Daten2,Daten3", lines[1]);
-        //    Assert.AreEqual("Daten4,Daten5,Daten6", lines[2]);
-        //}
+            // Assert
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(filePath));
+            string[] lines = File.ReadAllLines(filePath);
+            Assert.AreEqual(3, lines.Length);
+            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
+            Assert.AreEqual("Daten1,Daten2,Daten3", lines[1]);
+            Assert.AreEqual("Daten4,Daten5,Daten6", lines[2]);
+        }
     }
 }
