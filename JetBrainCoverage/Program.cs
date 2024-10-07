@@ -30,19 +30,7 @@ namespace JetBrainCoverage
             return true;
         }
 
-        public void test2(List<List<object>> data)
-        {
-            //List<List<object>> data = new List<List<object>>
-            //{
-            //    new List<object> { "Spalte1", "Spalte2", "Spalte3" },
-            //    new List<object> { 1, 2.5, DateTime.Now },
-            //    new List<object> { "Daten4", true, 3.14 }
-            //};
-
-            string filePath = @"C:\Pfad\zur\Datei.csv";
-            SaveListToCSV(data, filePath);
-        }
-
+ 
         public void SaveListToCSV(List<List<string>> data, string filePath)
         {
             StringBuilder csvContent = new StringBuilder();
@@ -73,6 +61,51 @@ namespace JetBrainCoverage
 
             // CSV-Datei speichern
             File.WriteAllText(filePath, csvContent.ToString());
+        }
+        public List<List<string>> MergeCSVFiles(string filePath1, string filePath2)
+        {
+            List<List<string>> mergedData = new List<List<string>>();
+
+            // Read data from first CSV file
+            List<List<string>> data1 = ReadCSVFile(filePath1);
+
+            // Read data from second CSV file
+            List<List<string>> data2 = ReadCSVFile(filePath2);
+
+            // Merge the data
+            mergedData.AddRange(data1);
+            mergedData.AddRange(data2);
+
+            return mergedData;
+        }
+
+        public List<List<string>> ReadCSVFile(string filePath)
+        {
+            List<List<string>> data = new List<List<string>>();
+
+            // Read all lines from the CSV file
+            string[] lines = File.ReadAllLines(filePath);
+
+            // Process each line
+            foreach (string line in lines)
+            {
+                // Split the line into columns
+                string[] columns = line.Split(',');
+
+                // Create a list to store the column values
+                List<string> rowData = new List<string>();
+
+                // Add each column value to the list
+                foreach (string column in columns)
+                {
+                    rowData.Add(column);
+                }
+
+                // Add the row data to the data list
+                data.Add(rowData);
+            }
+
+            return data;
         }
     }
 

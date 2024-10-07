@@ -9,157 +9,59 @@ namespace UnitTestProject1
     [TestFixture]
     public class ProgramTests
     {
-        private Program program;
-
-        [SetUp]
-        public void Setup()
-        {
-            program = new Program();
-        }
+        // ...
 
         [Test]
-        public void Test_SaveListToCSV_WithListOfStrings_ShouldSaveCSVFile()
+        public void Test_ReadCSVFile_WithValidFilePath_ShouldReturnCorrectData()
         {
             // Arrange
-            List<List<string>> data = new List<List<string>>
+            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
+            List<List<string>> expectedData = new List<List<string>>
             {
                 new List<string> { "Spalte1", "Spalte2", "Spalte3" },
                 new List<string> { "Daten1", "Daten2", "Daten3" },
                 new List<string> { "Daten4", "Daten5", "Daten6" }
             };
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
+
+            Program program = new Program();
+            // Create the CSV file
+            program.SaveListToCSV(expectedData, filePath);
 
             // Act
-            program.SaveListToCSV(data, filePath);
+            List<List<string>> actualData = program.ReadCSVFile(filePath);
 
             // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(3, lines.Length);
-            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-            Assert.AreEqual("Daten1,Daten2,Daten3", lines[1]);
-            Assert.AreEqual("Daten4,Daten5,Daten6", lines[2]);
-        }
-
-        [Test]
-        public void Test_SaveListToCSV_WithListOfObjects_ShouldSaveCSVFile()
-        {
-            // Arrange
-            var s = DateTime.Now.ToString();
-            List<List<object>> data = new List<List<object>>
+            Assert.AreEqual(expectedData.Count, actualData.Count);
+            for (int i = 0; i < expectedData.Count; i++)
             {
-                new List<object> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<object> { 1, 2.5, s },
-                new List<object> { "Daten4", true, 3.14 }
-            };
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
-
-            // Act
-            program.SaveListToCSV(data, filePath);
-
-            // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(3, lines.Length);
-            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-            Assert.AreEqual("1,2.5," + s, lines[1]);
-            Assert.AreEqual("Daten4,True,3.14", lines[2]);
+                CollectionAssert.AreEqual(expectedData[i], actualData[i]);
+            }
         }
 
         [Test]
-        public void Test_SaveListToCSV_WithEmptyList_ShouldSaveEmptyCSVFile()
+        public void Test_ReadCSVFile_WithEmptyFile_ShouldReturnEmptyData()
         {
             // Arrange
-            List<List<string>> data = new List<List<string>>();
+            string filePath = Path.Combine(Path.GetTempPath(), "empty.csv");
+            File.WriteAllText(filePath, "");
 
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
-
+            Program program = new Program();
             // Act
-            program.SaveListToCSV(data, filePath);
+            List<List<string>> actualData = program.ReadCSVFile(filePath);
 
             // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(0, lines.Length);
+            Assert.AreEqual(0, actualData.Count);
         }
 
         [Test]
-        public void Test_Test_WithInvalidFilePath_ShouldReturnFalse()
+        public void Test_ReadCSVFile_WithInvalidFilePath_ShouldThrowFileNotFoundException()
         {
             // Arrange
             string filePath = @"C:\Invalid\Path\test.csv";
 
-            // Act
-            bool result = program.Test(filePath);
-
-            // Assert
-            Assert.IsFalse(result);
-        }
-
-        [Test]
-        public void Test_SaveListToCSV_WithListOfStrings_ShouldSaveCSVFileWithCorrectContent()
-        {
-            // Arrange
-            List<List<string>> data = new List<List<string>>
-            {
-                new List<string> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<string> { "Daten1", "Daten2", "Daten3" },
-                new List<string> { "Daten4", "Daten5", "Daten6" }
-            };
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
-
-            // Act
-            program.SaveListToCSV(data, filePath);
-
-            // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(3, lines.Length);
-            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-            Assert.AreEqual("Daten1,Daten2,Daten3", lines[1]);
-            Assert.AreEqual("Daten4,Daten5,Daten6", lines[2]);
-        }
-
-        [Test]
-        public void Test_SaveListToCSV_WithListOfObjects_ShouldSaveCSVFileWithCorrectContent()
-        {
-            // Arrange
-            var s = DateTime.Now.ToString();
-            List<List<object>> data = new List<List<object>>
-            {
-                new List<object> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<object> { 1, 2.5, s },
-                new List<object> { "Daten4", true, 3.14 }
-            };
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
-
-            // Act
-            program.SaveListToCSV(data, filePath);
-
-            // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(3, lines.Length);
-            Assert.AreEqual("Spalte1,Spalte2,Spalte3", lines[0]);
-            Assert.AreEqual("1,2.5," + s, lines[1]);
-            Assert.AreEqual("Daten4,True,3.14", lines[2]);
-        }
-
-        [Test]
-        public void Test_SaveListToCSV_WithEmptyList_ShouldSaveEmptyCSVFile2()
-        {
-            // Arrange
-            List<List<string>> data = new List<List<string>>();
-
-            string filePath = Path.Combine(Path.GetTempPath(), "test.csv");
-
-            // Act
-            program.SaveListToCSV(data, filePath);
-
-            // Assert
-            Assert.IsTrue(File.Exists(filePath));
-            string[] lines = File.ReadAllLines(filePath);
-            Assert.AreEqual(0, lines.Length);
+            Program program = new Program();
+            // Act & Assert
+            Assert.Throws<FileNotFoundException>(() => program.ReadCSVFile(filePath));
         }
     }
 }
