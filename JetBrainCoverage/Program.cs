@@ -30,14 +30,14 @@ namespace JetBrainCoverage
             return true;
         }
 
-        public void test2()
+        public void test2(List<List<object>> data)
         {
-            List<List<object>> data = new List<List<object>>
-            {
-                new List<object> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<object> { 1, 2.5, DateTime.Now },
-                new List<object> { "Daten4", true, 3.14 }
-            };
+            //List<List<object>> data = new List<List<object>>
+            //{
+            //    new List<object> { "Spalte1", "Spalte2", "Spalte3" },
+            //    new List<object> { 1, 2.5, DateTime.Now },
+            //    new List<object> { "Daten4", true, 3.14 }
+            //};
 
             string filePath = @"C:\Pfad\zur\Datei.csv";
             SaveListToCSV(data, filePath);
