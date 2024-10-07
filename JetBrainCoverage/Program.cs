@@ -17,21 +17,8 @@ namespace JetBrainCoverage
         {
         }
 
-        public bool Test(string filePath)
-        {
-            List<List<string>> data = new List<List<string>>
-            {
-                new List<string> { "Spalte1", "Spalte2", "Spalte3" },
-                new List<string> { "Daten1", "Daten2", "Daten3" },
-                new List<string> { "Daten4", "Daten5", "Daten6" }
-            };
-            if (filePath.Contains("\\")) return false;
-            SaveListToCSV(data, filePath);
-            return true;
-        }
 
- 
-        public void SaveListToCSV(List<List<string>> data, string filePath)
+        public string[] SaveListToCSV(List<List<string>> data, string filePath)
         {
             StringBuilder csvContent = new StringBuilder();
 
@@ -43,6 +30,7 @@ namespace JetBrainCoverage
 
             // CSV-Datei speichern
             File.WriteAllText(filePath, csvContent.ToString());
+            return File.ReadAllLines(filePath);
         }
         public void SaveListToCSV<T>(List<List<T>> data, string filePath)
         {
