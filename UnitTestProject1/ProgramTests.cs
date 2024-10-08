@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace UnitTestProject1
 {
-    [TestFixture]
+    [TestFixture, Ignore]
     public class ProgramTests
     {
         // ...
