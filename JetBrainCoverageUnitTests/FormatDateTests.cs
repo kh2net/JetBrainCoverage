@@ -43,7 +43,7 @@ namespace JetBrainCoverage.Tests
         }
 
         [Test]
-        public void getType_ValidTypeName_ReturnsType()
+        public void GetType_ValidTypeName_ReturnsType()
         {
             // Arrange
             string typeName = "System.String";
@@ -56,7 +56,7 @@ namespace JetBrainCoverage.Tests
         }
 
         [Test]
-        public void getType_EmptyTypeName_ReturnsNull()
+        public void GetType_EmptyTypeName_ReturnsNull()
         {
             // Arrange
             string typeName = string.Empty;
@@ -69,7 +69,7 @@ namespace JetBrainCoverage.Tests
         }
 
         [Test]
-        public void getType_InvalidTypeName_ReturnsNull()
+        public void GetType_InvalidTypeName_ReturnsNull()
         {
             // Arrange
             string typeName = "InvalidType";
