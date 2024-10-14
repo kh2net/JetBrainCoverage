@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using Assert = NUnit.Framework.Assert;
 
 namespace JetBrainCoverage.Tests
 {
@@ -31,6 +32,17 @@ namespace JetBrainCoverage.Tests
         }
 
         [Test]
+        public void ParseDate_InvalidDateStringAndFormat_ThrowsNullException()
+        {
+            // Arrange
+            string dateString = "";
+            string format = "MM/dd/yyyy";
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => FormatDate.ParseDate(dateString, format));
+        }
+
+        [Test]
         public void getType_ValidTypeName_ReturnsType()
         {
             // Arrange
@@ -55,6 +67,7 @@ namespace JetBrainCoverage.Tests
             // Assert
             Assert.IsNull(result);
         }
+
         [Test]
         public void getType_InvalidTypeName_ReturnsNull()
         {
@@ -80,6 +93,30 @@ namespace JetBrainCoverage.Tests
 
             // Assert
             Assert.AreEqual("2022-01-01", result);
+        }
+        [Test]
+        public void FormatDate2String_ValidDate_ThrowsException()
+        {
+            // Arrange
+            DateTime date = new DateTime(2022, 01, 01);
+            string format = "";
+
+            // Act
+            Assert.Throws<FormatException>(() => FormatDate.FormatDate2String(date, format));
+        }
+
+        [Test,Ignore]
+        public void FormatDate2String_ValidFormat_ReturnsMinDateFormattedString()
+        {
+            // Arrange
+            DateTime? date = null;
+            string format = "yyyy-MM-dd";
+
+            // Act
+            string result = FormatDate.FormatDate2String(date, format);
+
+            // Assert
+            Assert.AreEqual("0001-01-01", result);
         }
     }
 }

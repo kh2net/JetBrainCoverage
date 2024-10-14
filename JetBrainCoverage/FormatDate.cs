@@ -22,9 +22,12 @@ namespace JetBrainCoverage
             return type;
         }
 
-        public static string FormatDate2String(DateTime date, string format)
+        public static string FormatDate2String(DateTime? date, string format)
         {
-            return date.ToString(format);
+            if (string.IsNullOrEmpty(format)) throw new FormatException();
+            if(!date.HasValue)
+                date= DateTime.MinValue;
+            return date.GetValueOrDefault().ToString(format);
         }
     }
 }
